@@ -2,13 +2,15 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const passport = require('passport');
+const pasportLocal = require('passport-local');
 const port = 3000 || process.env.PORT
 
 const app = express()
 
 /* App Config */
 mongoose.Promise = global.Promise
-let localDB = 'mongodb://localhost/cms-live'
+let localDB = 'mongodb://localhost/press-live'
 mongoose.connect(localDB)
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error'))
