@@ -13,7 +13,7 @@ router.delete('/users/:id', controllers.deleteUser)
 
 //articels
 router.get('/articels', controllers.articelsAll)
-// router.get('/articels/:id', controllers.articelsId)
+router.get('/articels/:id', controllers.articelsId)
 router.post('/articels', controllers.articelsCreate)
 router.put('/articels/:id', controllers.articelsUpdate)
 router.delete('/articels/:id', controllers.articelsDelete)

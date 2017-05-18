@@ -2,7 +2,7 @@
   <div id="app">
     <div class="ui container">
       <header-bar></header-bar>
-      <!-- <router-view></router-view> -->
+      <router-view v-if="status"></router-view>
     </div>
   </div>
 </template>
@@ -12,9 +12,17 @@ import HeaderBar from './components/HeadersBar.vue'
 
 export default {
   name: 'app',
+  data(){
+    return {
+      status : true
+    }
+  },
   components: {
     HeaderBar
   },
+  created(){
+
+  }
 }
 </script>
 

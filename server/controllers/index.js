@@ -24,8 +24,7 @@ controllers.login = (req,res)=>{
   console.log('kesini');
   User.findOne({username : req.body.username},(err, data)=>{
     if(passwordHash.verify(req.body.password, data.password)){
-      let token = jwt.sign({username : data.username}, 'sssss', { expiresIn : '1d' })
-      res.send({token : token})
+      res.send({'username' : data.username})
     }
   })
 }
@@ -56,6 +55,11 @@ controllers.deleteUser = (req, res)=>{
 // //articels
 controllers.articelsAll = (req, res)=>{
   Articels.find({},(err,data)=>{
+    res.send(data)
+  })
+}
+controllers.articelsId =(req,res)=>{
+  Articels.findById(req.params.id, (err, data)=>{
     res.send(data)
   })
 }
