@@ -21,6 +21,7 @@ controllers.getId = (req,res)=>{
 }
 
 controllers.login = (req,res)=>{
+  console.log('kesini');
   User.findOne({username : req.body.username},(err, data)=>{
     if(passwordHash.verify(req.body.password, data.password)){
       let token = jwt.sign({username : data.username}, 'sssss', { expiresIn : '1d' })
