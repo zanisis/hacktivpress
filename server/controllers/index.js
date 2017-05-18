@@ -8,6 +8,18 @@ const Articels = require('../models/articels');
 
 let controllers = {}
 //users
+controllers.getUser = (req,res)=>{
+  User.find({}, (err,data)=>{
+    res.send(data)
+  })
+}
+
+controllers.getId = (req,res)=>{
+  User.findById(req.params.id, (err,data)=>{
+    res.send(data)
+  })
+}
+
 controllers.login = (req,res)=>{
   User.findOne({username : req.body.username},(err, data)=>{
     if(passwordHash.verify(req.body.password, data.password)){
@@ -28,13 +40,17 @@ controllers.register = (req,res)=>{
   })
 }
 
-// controllers.updateUser = (req,res)=>{
-//
-// }
-//
-// controllers.deleteUser = (req, res)=>{
-//
-// }
+controllers.updateUser = (req,res)=>{
+  User.findById(req.params.id, (err, data)=>{
+    res.send(data)
+  })
+}
+
+controllers.deleteUser = (req, res)=>{
+  User.findByIdAndRemove(req.params.id, (err,data)=>{
+    res.send(data)
+  })
+}
 
 // //articels
 controllers.articelsAll = (req, res)=>{
@@ -58,9 +74,9 @@ controllers.articelsCreate = (req,res)=>{
 
 controllers.articelsUpdate = (req,res)=>{
   Articels.findById(req.params.id, (err, data)=>{
-    title : req.body.title || data.title
-    content : req.body.content || data.content
-    category : req.body.category || data.category
+    data.title = req.body.title || data.title,
+    data.content = req.body.content || data.content,
+    data.category = req.body.category || data.category
 
     data.save((err, data)=>{
       res.send(data)
@@ -69,7 +85,9 @@ controllers.articelsUpdate = (req,res)=>{
 }
 
 controllers.articelsDelete = (req,res)=>{
-
+  Articels.findByIdAndRemove(req.params.id, (err, data)=>{
+    res.send({status: 'ok'})
+  })
 }
 
 module.exports = controllers;
